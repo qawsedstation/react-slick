@@ -311,6 +311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (this.props.dots === true && this.state.slideCount >= this.props.slidesToShow) {
 	      var dotProps = {
+	        dotsClickable: this.props.dotsClickable,
 	        dotsClass: this.props.dotsClass,
 	        slideCount: this.state.slideCount,
 	        slidesToShow: this.props.slidesToShow,
@@ -1363,6 +1364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    centerPadding: '50px',
 	    cssEase: 'ease',
 	    dots: false,
+	    dotsClickable: true,
 	    dotsClass: 'slick-dots',
 	    draggable: true,
 	    easing: 'linear',
@@ -1637,7 +1639,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // In Autoplay the focus stays on clicked button even after transition
 	    // to next slide. That only goes away by click somewhere outside
 	    e.preventDefault();
-	    this.props.clickHandler(options);
+	    if (this.props.dotsClickable === true) {
+	      this.props.clickHandler(options);
+	    }
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -1668,7 +1672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        { key: i, className: className },
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: _this.clickHandler.bind(_this, dotOptions) },
+	          { disabled: _this.props.dotsClickable === false ? 'disabled' : null, onClick: _this.clickHandler.bind(_this, dotOptions) },
 	          i + 1
 	        )
 	      );
